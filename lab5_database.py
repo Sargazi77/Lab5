@@ -1,9 +1,10 @@
 import sqlite3
  
 conn = sqlite3.connect('database.sqlite')
-conn.execute('DROP TABLE users')
- 
 conn.execute('CREATE TABLE IF NOT EXISTS users (name text, country text, catches int)')
+conn.execute('INSERT INTO users values (? , ?, ?)', ("Janne Mustonen","Finland","98"))
+conn.execute('INSERT INTO users values (? , ?, ?)', ("Ian Stewart","Canada","94"))
+ 
  
 def add_user_to_db(name,country,catches):
     with sqlite3.connect("database.sqlite") as conn:
@@ -15,10 +16,18 @@ def show_All():
     return display    
     conn.close()
  
+def search(name):
+    with sqlite3.connect("database.sqlite") as conn:
+        try:
+            find = conn.execute(f'SELECT * FROM users where name = {name}')
+        except:
+            return False   
+    return find
+    conn.close()    
+ 
+ 
+ 
  
  
  
 conn.commit()
- 
- 
- 

@@ -1,3 +1,4 @@
+     
 import lab5_database
 def main():
     while True:
@@ -5,8 +6,8 @@ def main():
         user_input = int(input())
         if user_input == 1:
             add_user()
-        #elif user_input == 2:
-            #search_user()
+        elif user_input == 2:
+            search_user()
         elif user_input == 3:
             show_all()
         #elif user_input == 9:
@@ -16,7 +17,7 @@ def main():
 def add_user():
     print('Please enter the name of the user you want to add')
     name = input()
-    
+ 
     while len(name) == 0:
         print("You have to enter something")
         name = input()
@@ -30,19 +31,24 @@ def add_user():
     while len(catches) == 0:
         print("You have to enter something")
         catches = input()
-
+ 
     lab5_database.add_user_to_db(name,country,catches)
-
-
-
+    main()
+ 
+ 
+ 
 def show_all():
     display_all= lab5_database.show_All()
     for x in display_all:
         print(x)
-
+    main()
+ 
+def search_user():
+    name = input("PLease enter a name you want to search for")
+    find = lab5_database.search(name)  
+    #
+    print(find)     
+    main()
 if __name__== "__main__":
     main()
-
-
-
-
+ 
